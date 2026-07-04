@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+# build output
+app/frontend/dist/
+app/backend/exports/_tmp_*/
+# runtime generated projects (可重建)
+app/backend/projects/
+# python cache
+__pycache__/
+*.pyc
+# env / secrets
+.env
+*.env
+# os / editor
+.DS_Store
+.vscode/
+.idea/
+# omx
+.omx/
+# temp
+/tmp/

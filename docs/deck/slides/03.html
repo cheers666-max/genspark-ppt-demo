@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{width:1280px;height:720px;font-family:'Noto Sans SC',sans-serif;color:#1a1a1a;background:#fff;overflow:hidden}
+    :root{--c1:#1E293B;--c2:#D97706}
+  </style></head><body><div style="width: 1280px; height: 720px; box-sizing: border-box; padding: 40px 60px; background: radial-gradient(circle at top right, #1E293B 0%, #0F172A 100%); color: #F8FAFC; font-family: 'Noto Sans SC', sans-serif; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+    
+    <!-- 装饰背景纹理：调整尺寸与定位，确保不溢出画布 -->
+    <div style="position: absolute; top: -50px; right: -50px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%); pointer-events: none; overflow: hidden;"></div>
+    <div style="position: absolute; bottom: -50px; left: -50px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(99,102,241,0.05) 0%, transparent 70%); pointer-events: none; overflow: hidden;"></div>
+
+    <!-- 头部：分类与主标题 -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(248, 250, 252, 0.1); padding-bottom: 20px; z-index: 10;">
+        <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="background: #D97706; color: #F8FAFC; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 3px; letter-spacing: 1px;">电通2024白皮书</span>
+                <span style="color: #64748B; font-size: 14px; font-weight: 500;">DENTSU CONSUMPTION REPORT</span>
+            </div>
+            <h1 style="font-size: 32px; font-weight: 700; margin: 0; color: #F8FAFC; letter-spacing: -0.5px; line-height: 1.2;">
+                数据解构：日本年轻一代的<span style="color: #F59E0B;">“体验型消费”</span>崛起
+            </h1>
+        </div>
+        <div style="text-align: right;">
+            <span style="font-size: 12px; color: #64748B; display: block; font-weight: 500;">FOCUS GROUP</span>
+            <span style="font-size: 18px; color: #F59E0B; font-weight: 700; letter-spacing: 1px;">20-39岁年轻群体</span>
+        </div>
+    </div>
+
+    <!-- 主体内容区：左右分栏 -->
+    <div style="display: flex; gap: 40px; height: 460px; align-items: center; z-index: 10; overflow: hidden;">
+        
+        <!-- 左栏：核心数据指标与图表 -->
+        <div style="flex: 1.2; display: flex; flex-direction: column; gap: 24px; overflow: hidden;">
+            
+            <!-- 核心数据卡片 -->
+            <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(217, 119, 6, 0.3); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #D97706;"></div>
+                <div style="font-size: 16px; color: #94A3B8; margin-bottom: 8px; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+                    <span style="width: 6px; height: 6px; background: #D97706; border-radius: 50%;"></span>
+                    20-39岁群体体验型消费支出占比
+                </div>
+                <div style="display: flex; align-items: baseline; gap: 10px;">
+                    <span style="font-size: 64px; font-weight: 800; color: #F59E0B; line-height: 1; font-family: 'Helvetica Neue', sans-serif;">42.8%</span>
+                    <span style="font-size: 16px; color: #10B981; font-weight: 600;">↑ 创历史新高</span>
+                </div>
+                <p style="font-size: 14px; color: #94A3B8; margin: 12px 0 0 0; line-height: 1.6;">
+                    相较于传统物质占有，将近半数的消费预算被分配至“时间与体验”的购买，年轻一代正加速告别“物欲时代”。
+                </p>
+            </div>
+
+            <!-- 趋势对比条形图 -->
+            <div style="background: rgba(30, 41, 59, 0.3); border: 1px solid rgba(248, 250, 252, 0.05); border-radius: 12px; padding: 20px 24px; overflow: hidden;">
+                <div style="font-size: 14px; color: #F8FAFC; font-weight: 700; margin-bottom: 16px; display: flex; justify-content: space-between;">
+                    <span>消费重心转移：“物” ➔ “事”</span>
+                    <span style="color: #64748B; font-weight: normal;">单位：%</span>
+                </div>
+                
+                <!-- 物质消费 -->
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #94A3B8; margin-bottom: 6px;">
+                        <span>物质型消费（实物购买、商品占有）</span>
+                        <span style="color: #94A3B8; font-weight: 600;">31.2%</span>
+                    </div>
+                    <div style="height: 8px; background: rgba(248, 250, 252, 0.1); border-radius: 4px; overflow: hidden;">
+                        <div style="width: 31.2%; height: 100%; background: #64748B; border-radius: 4px;"></div>
+                    </div>
+                </div>
+
+                <!-- 体验消费 -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #F8FAFC; margin-bottom: 6px;">
+                        <span style="font-weight: 600;">体验型消费（旅行、社交、个人提升）</span>
+                        <span style="color: #F59E0B; font-weight: 700;">42.8%</span>
+                    </div>
+                    <div style="height: 8px; background: rgba(248, 250, 252, 0.1); border-radius: 4px; overflow: hidden;">
+                        <div style="width: 42.8%; height: 100%; background: linear-gradient(90deg, #D97706, #F59E0B); border-radius: 4px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 右栏：视觉呈现与深度洞察 -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; height: 100%; overflow: hidden;">
+            
+            <!-- 意象图片 -->
+            <div style="flex: 1; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(248, 250, 252, 0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.3);">
+                <img src="https://picsum.photos/seed/%E6%95%B0%E6%8D%AE%E0/800/600" alt="Experience Economy" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75) contrast(1.1);">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0) 100%); padding: 20px; box-sizing: border-box;">
+                    <div style="font-size: 14px; color: #F59E0B; font-weight: 700; margin-bottom: 4px;">深度洞察</div>
+                    <div style="font-size: 13px; color: #E2E8F0; line-height: 1.5;">年轻一代更倾向于通过社交媒体分享独特的“即时体验”，这种社交货币属性进一步推动了体验型消费的增长。</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div></body></html>
