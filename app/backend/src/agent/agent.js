@@ -10,12 +10,14 @@ import { buildSlideHtml } from './slideHtml.js';
 import { DEMO_DECK } from './demoDeck.js';
 import { provider, chat, parseJsonLoose, stripCodeFence } from '../util/llm.js';
 import * as store from '../store/project.js';
+import {
+  SYSTEM_PROMPT, OUTLINE_USER, HTML_CONTENT_SYSTEM, HTML_CONTENT_USER,
+  HTML_TOC_SYSTEM, HTML_TOC_USER, FIX_SYSTEM, FIX_USER,
+  READ_IMAGE_SELFCHECK, READ_IMAGE_VERIFY, IMAGE_GEN_QUERY
+} from './prompts.js';
 
-const SYSTEM_PROMPT = `你是 Genspark AI Slides 复刻版的 AI 演示设计师。遵循 5 阶段流程：
-1. Strategy（为什么/给谁）2. Substance（用什么素材）3. Structure（如何讲故事/大纲）
-4. Surface（视觉/版式）5. Execution（生成 HTML 幻灯片 + 自检）
-原则：视觉优先、结构完整、数据准确、最小 3-6 页默认。
-输出语言：zh-CN。幻灯片用 HTML+内联 CSS，画布 1280x720，Google Fonts。`;
+const SYSTEM_PROMPT_OLD = null; // 已迁移到 prompts.js
+
 
 export class SlideAgent extends EventEmitter {
   constructor({ project_id, userPrompt }) {
@@ -194,7 +196,7 @@ export class SlideAgent extends EventEmitter {
     const researchCtx = (ws1?.results?.[0]?.snippet || '') + ' ' + (wsBatch?.map(r => r?.results?.[0]?.snippet || '').join(' ') || '');
     const outlineText = await chat([
       ...this.history,
-      { role: 'user', content: `基于我的请求和搜索素材，给出 4-7 页幻灯片大纲，严格 JSON：{"title":"...", "pages":[{"page":1,"title":"...","template":"cover|toc|content|closing","brief":"...","need_image":true/false}],"palette":["#hex"],"brand":"..."}。\n建议结构：第1页 cover，第2页 toc(目录页，列出后续各页标题)，中间 content 页，最后 closing。\n搜索素材摘要：${researchCtx.slice(0,800)}\n只输出 JSON。` }
+      { role: 'user', content: OUTLINE_USER(researchCtx) }
     ], { temperature: 0.4, max_tokens: 4096 });
     const outline = parseJsonLoose(outlineText) || {
       title: this.userPrompt.slice(0, 40),
@@ -228,14 +230,14 @@ export class SlideAgent extends EventEmitter {
     let generatedImg = null;
     try {
       const ig = await this.tryTool('image_generation', {
-        query: `${outline.title} 主题插图，现代极简风格，配色 ${outline.palette?.join(' ')}`,
+        query: IMAGE_GEN_QUERY(outline.title, outline.palette || ['#1e3a5f', '#d63031']),
         aspect_ratio: '16:9', task_summary: 'cover 主题图', image_urls: [], is_creating_new_full_slide: false
       });
       generatedImg = ig?.image_url;
     } catch (e) { console.error('[image_generation]', e.message); }
     // read_image 用 VLM 读一张搜到的图，验证可用性
     const firstImg = Object.values(pageImages)[0]?.[0];
-    if (firstImg) await this.tryTool('read_image', { image_url: firstImg, question: '描述这张图，判断是否适合用于营销策略幻灯片。' });
+    if (firstImg) await this.tryTool('read_image', { image_url: firstImg, question: READ_IMAGE_VERIFY });
 
     const palette = outline.palette || ['#1e3a5f', '#d63031', '#f5f5f5'];
 
@@ -248,16 +250,15 @@ export class SlideAgent extends EventEmitter {
       const batch = outline.pages.slice(start, start + BATCH);
       await Promise.all(batch.map(async (p) => {
         const imgs = pageImages[p.page] || (p.template === 'cover' && generatedImg ? [generatedImg] : []);
-        const imgHint = imgs.length ? `\n可用图片 URL（可在 HTML 里用 <img src="..."> 嵌入）：${imgs.join(' , ')}` : '';
-        let sysContent;
+        const imgHint = imgs.length ? `\n# 可用图片\n可在 HTML 里用 <img src="..."> 嵌入这些 URL：${imgs.join(' , ')}` : '';
+        let sysContent, userContent;
         if (p.template === 'toc') {
-          sysContent = `生成目录页 HTML。画布 1280x720，内联 CSS，Google Fonts (Noto Sans SC)，配色：${palette.join(', ')}。只输出 <body> 内 HTML。版式：目录页（toc），清晰列出后续各页标题（编号+标题），左侧大标题"目录/CONTENTS"，右侧条目列表带页码。语言 zh-CN。不要 markdown 代码块包裹。`;
+          sysContent = HTML_TOC_SYSTEM(palette);
+          userContent = HTML_TOC_USER(p, tocEntries);
         } else {
-          sysContent = `生成单页幻灯片 HTML。画布 1280x720，内联 CSS，Google Fonts (Noto Sans SC)，配色：${palette.join(', ')}。只输出 <body> 内 HTML，不要 html/head/body 标签。不要 markdown 代码块包裹。版式：${p.template}。语言 zh-CN。${imgs.length ? '有图片时可嵌入增强视觉。' : ''}`;
+          sysContent = HTML_CONTENT_SYSTEM(palette);
+          userContent = HTML_CONTENT_USER(p, imgHint);
         }
-        const userContent = p.template === 'toc'
-          ? `标题：${p.title}\n要点：${p.brief}\n目录条目（后续各页）：\n${tocEntries.join('\n')}`
-          : `标题：${p.title}\n要点：${p.brief}${imgHint}`;
         const fullBody = await chat([
           { role: 'system', content: sysContent },
           { role: 'user', content: userContent }
@@ -286,8 +287,8 @@ export class SlideAgent extends EventEmitter {
         const bodyMatch = curHtml.match(/<body[^>]*>([\s\S]*)<\/body>/);
         const curBody = bodyMatch ? bodyMatch[1] : curHtml;
         const fixBody = await chat([
-          { role: 'system', content: `你是布局修复专家。给定当前幻灯片 HTML body 和检测到的问题，输出修复后的 body HTML（保持内容不变，只修布局：溢出元素加 overflow:hidden/缩小字号/调整 padding/限制宽度）。画布 1280x720。只输出 body 内 HTML，不要 html/head/body 标签，不要 markdown 包裹。` },
-          { role: 'user', content: `当前 HTML body:\n${curBody.slice(0, 6000)}\n\n问题:\n${JSON.stringify(highIssues)}` }
+          { role: 'system', content: FIX_SYSTEM },
+          { role: 'user', content: FIX_USER(curBody, highIssues) }
         ], { temperature: 0.2, max_tokens: 8000 });
         const fixedBody = stripCodeFence(fixBody);
         const fixedHtml = wrapHtml(fixedBody, palette);
@@ -302,7 +303,7 @@ export class SlideAgent extends EventEmitter {
     // read_image 用 VLM 自检首页截图
     try {
       const firstShot = `http://localhost:${process.env.PORT || 4000}/api/projects/${this.project_id}/screenshots/01.png`;
-      await this.tryTool('read_image', { image_url: firstShot, question: '这是幻灯片首页截图，评价布局/配色/可读性，指出问题。' });
+      await this.tryTool('read_image', { image_url: firstShot, question: READ_IMAGE_SELFCHECK });
     } catch (e) { console.error('[read_image]', e.message); }
     // jupyter_code_executor 生成一份数据处理脚本（演示数据处理能力）
     await this.tryTool('jupyter_code_executor', { instructions: '生成一份营销策略 KPI 数据示例并计算均值/方差' });
@@ -342,11 +343,17 @@ function markTodo(todos, doneCount) {
 }
 
 function wrapHtml(body, palette) {
+  const c1 = palette[0] || '#1e3a5f';
+  const c2 = palette[1] || '#d63031';
+  const c3 = palette[2] || '#6b7280';
+  const paper = palette[3] || '#f7f3ec';
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{width:1280px;height:720px;font-family:'Noto Sans SC',sans-serif;color:#1a1a1a;background:#fff;overflow:hidden}
-    :root{--c1:${palette[0]};--c2:${palette[1]||'#d63031'}}
+    :root{--c1:${c1};--c2:${c2};--c3:${c3};--paper:${paper};--ink:#1a1a1a}
+    html,body{width:1280px;height:720px;overflow:hidden}
+    body{font-family:'Noto Sans SC','PingFang SC',sans-serif;color:var(--ink);background:var(--paper);position:relative}
+    img{max-width:100%;display:block}
   </style></head><body>${body}</body></html>`;
 }

@@ -1,80 +1,230 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{width:1280px;height:720px;font-family:'Noto Sans SC',sans-serif;color:#1a1a1a;background:#fff;overflow:hidden}
-    :root{--c1:#1E293B;--c2:#D97706}
-  </style></head><body><div style="width: 1280px; height: 720px; background-color: #F8FAFC; background-image: radial-gradient(circle at 100% 0%, #F1F5F9 0%, #F8FAFC 100%); font-family: 'Noto Sans SC', sans-serif; padding: 0; margin: 0; box-sizing: border-box; position: relative; overflow: hidden; display: flex; flex-direction: row;">
-    
-    <!-- 装饰背景元素 - 限制在画布内 -->
-    <div style="position: absolute; top: 0px; left: 0px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(217,119,6,0.05) 0%, rgba(255,255,255,0) 70%); pointer-events: none; overflow: hidden;"></div>
-    <div style="position: absolute; bottom: 0px; right: 0px; width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, rgba(30,41,59,0.03) 0%, rgba(255,255,255,0) 70%); pointer-events: none; overflow: hidden;"></div>
-    
-    <!-- 左侧：大标题与主题定位 -->
-    <div style="width: 440px; height: 100%; background-color: #1E293B; padding: 80px 50px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 10px 0 30px rgba(30,41,59,0.15); z-index: 10;">
-        <!-- 顶部装饰线 -->
-        <div style="width: 60px; height: 4px; background-color: #D97706; border-radius: 2px;"></div>
-        
-        <!-- 核心标题区 -->
-        <div style="margin-top: -40px;">
-            <div style="font-size: 16px; color: #F59E0B; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px;">CONTENTS</div>
-            <h1 style="font-size: 48px; color: #F8FAFC; font-weight: 900; margin: 0; line-height: 1.2; letter-spacing: 2px;">目录</h1>
-            <div style="width: 100%; height: 1px; background-color: rgba(248,250,252,0.15); margin: 30px 0;"></div>
-            <p style="font-size: 15px; color: #94A3B8; line-height: 1.8; margin: 0; font-weight: 300; letter-spacing: 0.5px;">
-                体验经济的日本路径：<br>
-                探索从“物质满足”向“精神共鸣”转型的商业场景与落地方法论。
-            </p>
+    :root{--c1:#1A2B4C;--c2:#E65F2B;--c3:#64748B;--paper:#F8F9FA;--ink:#1a1a1a}
+    html,body{width:1280px;height:720px;overflow:hidden}
+    body{font-family:'Noto Sans SC','PingFang SC',sans-serif;color:var(--ink);background:var(--paper);position:relative}
+    img{max-width:100%;display:block}
+  </style></head><body><div class="slide-container" style="
+    --c1: #1A2B4C;
+    --c2: #E65F2B;
+    --c3: #64748B;
+    --paper: #F8F9FA;
+    --ink: #1a1a1a;
+    width: 1280px;
+    height: 720px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: var(--paper);
+    font-family: 'Noto Sans SC', sans-serif;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+">
+    <!-- 顶部装饰渐变条 -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, var(--c1) 0%, var(--c2) 50%, var(--c1) 100%);
+    "></div>
+
+    <!-- 左侧：标题与概述区域 -->
+    <div style="
+        width: 420px;
+        height: 100%;
+        padding: 80px 50px 80px 80px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid rgba(100, 116, 139, 0.15);
+        background: linear-gradient(180deg, rgba(26, 43, 76, 0.02) 0%, rgba(26, 43, 76, 0.05) 100%);
+    ">
+        <!-- 标题组 -->
+        <div>
+            <div style="
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--c2);
+                letter-spacing: 4px;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+            ">Contents</div>
+            <h1 style="
+                font-size: 48px;
+                font-weight: 900;
+                color: var(--c1);
+                margin: 0 0 20px 0;
+                line-height: 1.2;
+                letter-spacing: 2px;
+            ">目录</h1>
+            <div style="
+                width: 60px;
+                height: 4px;
+                background-color: var(--c2);
+                border-radius: 2px;
+            "></div>
         </div>
-        
-        <!-- 底部副标题/标识 -->
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 8px; height: 8px; background-color: #D97706; border-radius: 50%;"></div>
-            <span style="font-size: 12px; color: #64748B; letter-spacing: 2px; font-weight: 500; text-transform: uppercase;">EXPERIENCE ECONOMY</span>
+
+        <!-- 概述介绍 -->
+        <div style="margin-top: auto;">
+            <p style="
+                font-size: 14px;
+                color: var(--c3);
+                line-height: 1.8;
+                margin: 0;
+                letter-spacing: 0.5px;
+            ">
+                概览日本营销变革的三大核心维度：<br>
+                <span style="color: var(--c1); font-weight: 700;">消费演变</span>、<span style="color: var(--c1); font-weight: 700;">标杆案例</span> 与 <span style="color: var(--c1); font-weight: 700;">落地路径</span>
+            </p>
         </div>
     </div>
 
     <!-- 右侧：目录条目列表 -->
-    <div style="flex: 1; height: 100%; padding: 80px 80px 80px 70px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">
-        
-        <!-- 目录条目容器 -->
-        <div style="display: flex; flex-direction: column; gap: 24px;">
-            
-            <!-- 条目 03 -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 20px rgba(30,41,59,0.03); border-left: 4px solid #D97706; transition: all 0.3s ease;">
-                <div style="display: flex; align-items: center; gap: 24px;">
-                    <span style="font-size: 24px; font-weight: 800; color: #D97706; font-family: 'Georgia', serif; width: 30px;">03</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1E293B; letter-spacing: 0.5px;">数据解构：日本年轻一代的“体验型消费”崛起</span>
-                </div>
-                <div style="font-size: 14px; font-weight: 600; color: #64748B; background-color: #F1F5F9; padding: 4px 12px; border-radius: 20px;">P 03</div>
-            </div>
+    <div style="
+        flex: 1;
+        height: 100%;
+        padding: 80px 80px 80px 60px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    ">
+        <!-- 条目 1 -->
+        <div style="
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+        ">
+            <div style="
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--c2);
+                width: 50px;
+                font-family: 'Georgia', serif;
+            ">03</div>
+            <div style="
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--ink);
+                flex: 1;
+                padding-left: 10px;
+            ">消费者告别「物欲」：四大体验消费浪潮重塑市场边界</div>
+            <div style="font-size: 14px; color: var(--c3); font-family: 'Georgia', serif;">P. 03</div>
+        </div>
 
-            <!-- 条目 04 -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 20px rgba(30,41,59,0.03); border-left: 4px solid #1E293B; transition: all 0.3s ease;">
-                <div style="display: flex; align-items: center; gap: 24px;">
-                    <span style="font-size: 24px; font-weight: 800; color: #1E293B; font-family: 'Georgia', serif; width: 30px;">04</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1E293B; letter-spacing: 0.5px;">茑屋书店：不卖书，卖“生活方式提案”</span>
-                </div>
-                <div style="font-size: 14px; font-weight: 600; color: #64748B; background-color: #F1F5F9; padding: 4px 12px; border-radius: 20px;">P 04</div>
-            </div>
+        <!-- 条目 2 -->
+        <div style="
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+        ">
+            <div style="
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--c2);
+                width: 50px;
+                font-family: 'Georgia', serif;
+            ">04</div>
+            <div style="
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--ink);
+                flex: 1;
+                padding-left: 10px;
+            ">星野リゾート：将「住宿」转化为不可复制的自然探索体验</div>
+            <div style="font-size: 14px; color: var(--c3); font-family: 'Georgia', serif;">P. 04</div>
+        </div>
 
-            <!-- 条目 05 -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 20px rgba(30,41,59,0.03); border-left: 4px solid #1E293B; transition: all 0.3s ease;">
-                <div style="display: flex; align-items: center; gap: 24px;">
-                    <span style="font-size: 24px; font-weight: 800; color: #1E293B; font-family: 'Georgia', serif; width: 30px;">05</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1E293B; letter-spacing: 0.5px;">空间叙事：MUJI Base 与星巴克臻选的增值密码</span>
-                </div>
-                <div style="font-size: 14px; font-weight: 600; color: #64748B; background-color: #F1F5F9; padding: 4px 12px; border-radius: 20px;">P 05</div>
-            </div>
+        <!-- 条目 3 -->
+        <div style="
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+        ">
+            <div style="
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--c2);
+                width: 50px;
+                font-family: 'Georgia', serif;
+            ">05</div>
+            <div style="
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--ink);
+                flex: 1;
+                padding-left: 10px;
+            ">中目黑星巴克：把「喝咖啡」升级为五感俱全的娱乐盛宴</div>
+            <div style="font-size: 14px; color: var(--c3); font-family: 'Georgia', serif;">P. 05</div>
+        </div>
 
-            <!-- 条目 06 -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 20px rgba(30,41,59,0.03); border-left: 4px solid #1E293B; transition: all 0.3s ease;">
-                <div style="display: flex; align-items: center; gap: 24px;">
-                    <span style="font-size: 24px; font-weight: 800; color: #1E293B; font-family: 'Georgia', serif; width: 30px;">06</span>
-                    <span style="font-size: 18px; font-weight: 700; color: #1E293B; letter-spacing: 0.5px;">落地方法论：如何将您的品牌“事”态化</span>
-                </div>
-                <div style="font-size: 14px; font-weight: 600; color: #64748B; background-color: #F1F5F9; padding: 4px 12px; border-radius: 20px;">P 06</div>
-            </div>
+        <!-- 条目 4 -->
+        <div style="
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+        ">
+            <div style="
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--c2);
+                width: 50px;
+                font-family: 'Georgia', serif;
+            ">06</div>
+            <div style="
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--ink);
+                flex: 1;
+                padding-left: 10px;
+            ">重构 CX 触点：企业落地「事营销」的三大黄金法则</div>
+            <div style="font-size: 14px; color: var(--c3); font-family: 'Georgia', serif;">P. 06</div>
+        </div>
 
+        <!-- 条目 5 -->
+        <div style="
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+        ">
+            <div style="
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--c2);
+                width: 50px;
+                font-family: 'Georgia', serif;
+            ">07</div>
+            <div style="
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--ink);
+                flex: 1;
+                padding-left: 10px;
+            ">创造不可替代的「瞬间」：开启您的体验营销转型之旅</div>
+            <div style="font-size: 14px; color: var(--c3); font-family: 'Georgia', serif;">P. 07</div>
         </div>
     </div>
+
+    <!-- 右下角页码装饰 -->
+    <div style="
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+        font-family: 'Georgia', serif;
+        font-size: 14px;
+        color: var(--c3);
+        font-weight: bold;
+    ">02</div>
 </div></body></html>

@@ -1,94 +1,94 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{width:1280px;height:720px;font-family:'Noto Sans SC',sans-serif;color:#1a1a1a;background:#fff;overflow:hidden}
-    :root{--c1:#1E293B;--c2:#D97706}
-  </style></head><body><div style="width: 1280px; height: 720px; box-sizing: border-box; padding: 60px 80px; background: #F8FAFC; color: #1E293B; font-family: 'Noto Sans SC', sans-serif; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+    :root{--c1:#1A2B4C;--c2:#E65F2B;--c3:#64748B;--paper:#F8F9FA;--ink:#1a1a1a}
+    html,body{width:1280px;height:720px;overflow:hidden}
+    body{font-family:'Noto Sans SC','PingFang SC',sans-serif;color:var(--ink);background:var(--paper);position:relative}
+    img{max-width:100%;display:block}
+  </style></head><body><div class="slide-container" style="width: 1280px; height: 720px; box-sizing: border-box; padding: 60px 80px; background-color: var(--paper); color: var(--ink); font-family: 'Noto Sans SC', sans-serif; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative;">
+  
+  <!-- 装饰背景线 -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, var(--c1) 0%, var(--c2) 50%, var(--c3) 100%);"></div>
+
+  <!-- 头部：分类与主标题 -->
+  <header style="display: flex; flex-direction: column; gap: 8px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--c2); background-color: rgba(230, 95, 43, 0.1); padding: 4px 12px; border-radius: 4px;">METHODOLOGY</span>
+      <div style="height: 1px; flex-grow: 1; background-color: rgba(100, 116, 139, 0.2);"></div>
+      <span style="font-size: 14px; color: var(--c3); font-weight: 500;">06 / 09</span>
+    </div>
+    <h1 style="font-size: 40px; font-weight: 900; color: var(--c1); margin: 0; line-height: 1.3; letter-spacing: -0.5px;">
+      重构 CX 触点：企业落地「事营销」的三大黄金法则
+    </h1>
+    <p style="font-size: 16px; color: var(--c3); margin: 4px 0 0 0; font-weight: 400;">
+      总结从产品开发到场景设计、社群运营的系统化体验营销（Customer Experience）落地框架
+    </p>
+  </header>
+
+  <!-- 核心内容：三栏栅格 -->
+  <main style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 40px 0;">
     
-    <!-- 背景装饰线 -->
-    <div style="position: absolute; top: 0; right: 0; width: 350px; height: 100%; background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, rgba(217, 119, 6, 0.05) 100%); z-index: 1; clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);"></div>
+    <!-- 法则一 -->
+    <section style="background-color: #ffffff; border: 1px solid rgba(100, 116, 139, 0.15); border-radius: 12px; padding: 32px 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(26, 43, 76, 0.03); position: relative; transition: all 0.3s ease;">
+      <div style="position: absolute; top: -16px; left: 24px; width: 36px; height: 36px; background-color: var(--c1); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700;">01</div>
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; color: var(--c1); margin: 12px 0 16px 0; display: flex; align-items: center; gap: 8px;">
+          产品即场景
+        </h3>
+        <p style="font-size: 15px; color: var(--ink); line-height: 1.6; margin: 0 0 20px 0;">
+          将产品功能转化为用户可感知的具体生活场景，让产品本身成为体验的起点与核心载体。
+        </p>
+      </div>
+      <div style="border-top: 1px dashed rgba(100, 116, 139, 0.2); padding-top: 16px;">
+        <div style="font-size: 12px; color: var(--c3); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px;">落地路径</div>
+        <div style="font-size: 14px; color: var(--c1); font-weight: 500;">功能场景化 · 痛点即时解决 · 情感共鸣设计</div>
+      </div>
+    </section>
 
-    <!-- 头部：分类与标题 -->
-    <div style="position: relative; z-index: 2;">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-            <span style="font-size: 13px; font-weight: 700; color: #D97706; letter-spacing: 0.15em; text-transform: uppercase; background: rgba(217, 119, 6, 0.1); padding: 4px 12px; border-radius: 4px;">METHODOLOGY</span>
-            <div style="height: 1px; width: 60px; background: #D97706;"></div>
-            <span style="font-size: 13px; color: #64748B; font-weight: 500;">从“物”到“事”的品牌转型路径</span>
-        </div>
-        <h1 style="font-size: 40px; font-weight: 900; color: #1E293B; margin: 0; letter-spacing: -0.02em; line-height: 1.2;">
-            落地方法论：如何将您的品牌<span style="color: #D97706; background: linear-gradient(120deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0) 100%); padding: 0 8px; border-radius: 4px;">“事”态化</span>
-        </h1>
+    <!-- 法则二 -->
+    <section style="background-color: #ffffff; border: 1px solid rgba(100, 116, 139, 0.15); border-radius: 12px; padding: 32px 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(26, 43, 76, 0.03); position: relative; transition: all 0.3s ease;">
+      <div style="position: absolute; top: -16px; left: 24px; width: 36px; height: 36px; background-color: var(--c2); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700;">02</div>
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; color: var(--c1); margin: 12px 0 16px 0; display: flex; align-items: center; gap: 8px;">
+          触点即仪式
+        </h3>
+        <p style="font-size: 15px; color: var(--ink); line-height: 1.6; margin: 0 0 20px 0;">
+          在关键服务节点植入独特的仪式感，加深品牌记忆度，将物理接触升华为情感共鸣。
+        </p>
+      </div>
+      <div style="border-top: 1px dashed rgba(100, 116, 139, 0.2); padding-top: 16px;">
+        <div style="font-size: 12px; color: var(--c3); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px;">落地路径</div>
+        <div style="font-size: 14px; color: var(--c2); font-weight: 500;">峰终定律应用 · 行为仪式化 · 惊喜时刻创造</div>
+      </div>
+    </section>
+
+    <!-- 法则三 -->
+    <section style="background-color: #ffffff; border: 1px solid rgba(100, 116, 139, 0.15); border-radius: 12px; padding: 32px 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(26, 43, 76, 0.03); position: relative; transition: all 0.3s ease;">
+      <div style="position: absolute; top: -16px; left: 24px; width: 36px; height: 36px; background-color: var(--c1); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700;">03</div>
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; color: var(--c1); margin: 12px 0 16px 0; display: flex; align-items: center; gap: 8px;">
+          社群即生态
+        </h3>
+        <p style="font-size: 15px; color: var(--ink); line-height: 1.6; margin: 0 0 20px 0;">
+          构建高粘性的用户共同体，通过持续的价值共创与互动，实现从单次消费到终身价值的跃迁。
+        </p>
+      </div>
+      <div style="border-top: 1px dashed rgba(100, 116, 139, 0.2); padding-top: 16px;">
+        <div style="font-size: 12px; color: var(--c3); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px;">落地路径</div>
+        <div style="font-size: 14px; color: var(--c1); font-weight: 500;">共创机制建立 · 身份认同构建 · 圈层效应放大</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 页脚：行动启示 -->
+  <footer style="display: flex; align-items: center; justify-content: space-between; background-color: rgba(26, 43, 76, 0.03); padding: 16px 24px; border-radius: 8px; border-left: 4px solid var(--c2);">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 14px; font-weight: 700; color: var(--c1);">核心启示：</span>
+      <span style="font-size: 14px; color: var(--ink);">「事营销」的本质是化被动推销为主动卷入，通过重构触点，让用户在“参与”中完成心智占领。</span>
     </div>
+    <span style="font-size: 12px; color: var(--c3); font-weight: 500;">CX RECONSTRUCTION FRAMEWORK</span>
+  </footer>
 
-    <!-- 核心内容：三大黄金法则 -->
-    <div style="display: flex; gap: 30px; position: relative; z-index: 2; margin: 40px 0;">
-        
-        <!-- 法则一 -->
-        <div style="flex: 1; background: #FFFFFF; border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px -5px rgba(30, 41, 59, 0.03), 0 8px 10px -6px rgba(30, 41, 59, 0.03); border: 1px solid #E2E8F0; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #D97706;"></div>
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
-                    <span style="font-size: 14px; font-weight: 800; color: #D97706; letter-spacing: 0.05em;">RULE 01</span>
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(217, 119, 6, 0.08); display: flex; align-items: center; justify-content: center;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    </div>
-                </div>
-                <h3 style="font-size: 22px; font-weight: 800; color: #1E293B; margin: 0 0 12px 0;">空间场景化</h3>
-                <p style="font-size: 14px; color: #64748B; line-height: 1.6; margin: 0;">打破传统的物理陈列逻辑，将静态的产品容器转化为动态的生活剧场，让消费者在具体的场景中产生代入感。</p>
-            </div>
-            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #E2E8F0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 12px; font-weight: 700; color: #1E293B; background: #F1F5F9; padding: 2px 8px; border-radius: 4px;">行动指南</span>
-                <span style="font-size: 12px; color: #64748B;">重构货架，创造“生活提案”式陈列</span>
-            </div>
-        </div>
-
-        <!-- 法则二 -->
-        <div style="flex: 1; background: #FFFFFF; border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px -5px rgba(30, 41, 59, 0.03), 0 8px 10px -6px rgba(30, 41, 59, 0.03); border: 1px solid #E2E8F0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #F59E0B;"></div>
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
-                    <span style="font-size: 14px; font-weight: 800; color: #F59E0B; letter-spacing: 0.05em;">RULE 02</span>
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(245, 158, 11, 0.08); display: flex; align-items: center; justify-content: center;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    </div>
-                </div>
-                <h3 style="font-size: 22px; font-weight: 800; color: #1E293B; margin: 0 0 12px 0;">社群情感化</h3>
-                <p style="font-size: 14px; color: #64748B; line-height: 1.6; margin: 0;">超越单纯的买卖关系，以共同的价值观和兴趣为纽带，构建高黏性的情感共同体，让品牌成为用户的精神归属。</p>
-            </div>
-            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #E2E8F0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 12px; font-weight: 700; color: #1E293B; background: #F1F5F9; padding: 2px 8px; border-radius: 4px;">行动指南</span>
-                <span style="font-size: 12px; color: #64748B;">建立仪式感，培育高频互动的圈层</span>
-            </div>
-        </div>
-
-        <!-- 法则三 -->
-        <div style="flex: 1; background: #FFFFFF; border-radius: 16px; padding: 32px; box-shadow: 0 10px 25px -5px rgba(30, 41, 59, 0.03), 0 8px 10px -6px rgba(30, 41, 59, 0.03); border: 1px solid #E2E8F0; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #1E293B;"></div>
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
-                    <span style="font-size: 14px; font-weight: 800; color: #1E293B; letter-spacing: 0.05em;">RULE 03</span>
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(30, 41, 59, 0.08); display: flex; align-items: center; justify-content: center;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                    </div>
-                </div>
-                <h3 style="font-size: 22px; font-weight: 800; color: #1E293B; margin: 0 0 12px 0;">服务叙事化</h3>
-                <p style="font-size: 14px; color: #64748B; line-height: 1.6; margin: 0;">将标准化的服务流程转化为有温度的故事体验，在每一个触点设计戏剧性的“高光时刻”，创造终身难忘的记忆。</p>
-            </div>
-            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #E2E8F0; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 12px; font-weight: 700; color: #1E293B; background: #F1F5F9; padding: 2px 8px; border-radius: 4px;">行动指南</span>
-                <span style="font-size: 12px; color: #64748B;">设计峰值体验，让服务自带传播属性</span>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- 底部：总结与页码 -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 20px; position: relative; z-index: 2;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="width: 8px; height: 8px; border-radius: 50%; background: #D97706;"></span>
-            <p style="font-size: 13px; color: #64748B; margin: 0; font-weight: 500;">核心目标：从售卖“单一产品”升级为提供“生活方式的解决方案”</p>
-        </div>
-        <span style="font-size: 12px; font-weight: 700; color: #64748B; letter-spacing: 0.1em;">05 / METHODOLOGY</span>
-    </div>
 </div></body></html>

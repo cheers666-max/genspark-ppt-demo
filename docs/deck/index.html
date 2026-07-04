@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>现代日本营销策略 · toc+修复循环 demo</title>
+<title>现代日本营销策略 · 优化版（色彩一致性）</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -8,13 +8,15 @@ body{font-family:'Noto Sans SC',sans-serif;background:#0f172a;color:#e2e8f0;padd
 .wrap{max-width:1100px;margin:0 auto}
 header{padding:24px 0 32px;border-bottom:1px solid #334155;margin-bottom:32px}
 header .tag{font-size:12px;letter-spacing:.3em;color:#d9383a;font-weight:700}
-header h1{font-size:26px;font-weight:900;color:#fff;margin-top:8px;line-height:1.3}
+header h1{font-size:26px;font-weight:900;color:#fff;margin-top:8px}
 header .meta{font-size:13px;color:#94a3b8;margin-top:10px}
 header .dl{display:inline-block;margin-top:14px;padding:8px 16px;background:#d9383a;color:#fff;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600}
-.info{background:#1e293b;border:1px solid #334155;border-radius:8px;padding:16px 20px;font-size:13px;color:#cbd5e1;margin-bottom:24px;line-height:1.7}
+.info{background:#1e293b;border:1px solid #d9383a;border-radius:8px;padding:16px 20px;font-size:13px;color:#cbd5e1;margin-bottom:24px;line-height:1.7}
 .info b{color:#fff}
-.highlight{background:#0b1220;border:1px solid #d9383a;border-radius:6px;padding:12px 14px;margin-top:12px;font-size:12px}
-.highlight b{color:#d9383a}
+.stat{display:flex;gap:20px;margin-top:10px}
+.stat div{flex:1;background:#0b1220;border:1px solid #334155;border-radius:6px;padding:10px;text-align:center}
+.stat .n{font-size:24px;font-weight:900;color:#22c55e}
+.stat .l{font-size:11px;color:#94a3b8}
 .pages{display:flex;flex-direction:column;gap:32px}
 .page{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .page-head{display:flex;align-items:baseline;gap:12px;padding:14px 20px;background:#1e293b;color:#fff}
@@ -23,30 +25,32 @@ header .dl{display:inline-block;margin-top:14px;padding:8px 16px;background:#d93
 .page-head a{margin-left:auto;font-size:12px;color:#94a3b8;text-decoration:none}
 .page-head .tpl{font-size:10px;color:#06b6d4;border:1px solid #06b6d4;padding:1px 6px;border-radius:3px}
 .page-head .tpl.toc{color:#a855f7;border-color:#a855f7}
-.page-head .fixed{font-size:10px;color:#22c55e;border:1px solid #22c55e;padding:1px 6px;border-radius:3px}
 .page img{display:block;width:100%;height:auto}
 footer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:#64748b;text-align:center}
 </style></head><body><div class="wrap">
 <header>
-<div class="tag">GENSPARK AI SLIDES · 目录页 + 修复循环 DEMO</div>
+<div class="tag">PROMPT 优化版 · 色彩一致性 CSS 变量</div>
 <h1>现代日本营销策略：从「物」到「事」的体验经济打法</h1>
-<div class="meta">7 页（含 toc 目录页）· 19 工具 · check_slide_layout 检测+4 轮 LLM 修复 · project AwZb3f_1y_ · 2026-07-04</div>
-<a class="dl" href="exports/deck_1783144318540.pptx" download>⬇ 下载 PPTX</a>
+<div class="meta">7 页（含 toc）· 优化 prompt 强制 var(--c1)/var(--c2) 配色一致 · project YZNt3wRcUI · 2026-07-04</div>
+<a class="dl" href="exports/deck_1783151113733.pptx" download>⬇ 下载 PPTX</a>
 </header>
 <div class="info">
-<b>新增两个核心逻辑（对齐手册）：</b><br>
-1. <b>目录页（toc）</b>：outline 含 cover→toc→content→closing，第 2 页生成目录页列出后续各页标题（对齐 03-phase3 L306-308 Agenda[nav]）<br>
-2. <b>修复循环</b>：每页生成后 check_slide_layout 几何检测（溢出/重叠/小字）→ 检测到 high severity 问题则 LLM 修复 HTML → 重新截图验证（对齐 09-code-logic L560-603 "Loop until clean"）
-<div class="highlight"><b>本次修复循环：</b>check_slide_layout ×7 检测，4 页触发 LLM 修复（modify_slide ×11 = 7 初始 + 4 修复，slide_screenshot ×11 = 7 初始 + 4 修复后重截图）</div>
+<b>本次优化：System Prompt 规范化 + 色彩一致性</b><br>
+所有 LLM 调用 prompt 升级（角色/输出格式/约束/失败模式），HTML 生成 prompt 强制用 CSS 变量 var(--c1)/var(--c2)/var(--c3)/var(--paper)/var(--ink) 而非自填 hex，wrapHtml 注入完整 :root 变量系统，全 deck 色彩严格一致。
+<div class="stat">
+<div><div class="n">191</div><div class="l">CSS 变量引用</div></div>
+<div><div class="n">59</div><div class="l">硬编码 hex（多为 :root 定义）</div></div>
+<div><div class="n">35</div><div class="l">单页(slide3) var() 用量</div></div>
+</div>
 </div>
 <div class="pages">
-<div class="page"><div class="page-head"><span class="num">01</span><h2>现代日本营销策略：从「物」到「事」的体验经济打法</h2><span class="tpl">cover</span><a href="slides/01.html" target="_blank">原件 ↗</a></div><img src="screenshots/01.png"></div>
-<div class="page"><div class="page-head"><span class="num">02</span><h2>体验经济的日本路径</h2><span class="tpl toc">toc 目录页</span><a href="slides/02.html" target="_blank">原件 ↗</a></div><img src="screenshots/02.png"></div>
-<div class="page"><div class="page-head"><span class="num">03</span><h2>数据解构：日本年轻一代的"体验型消费"崛起</h2><span class="tpl">content</span><a href="slides/03.html" target="_blank">原件 ↗</a></div><img src="screenshots/03.png"></div>
-<div class="page"><div class="page-head"><span class="num">04</span><h2>茑屋书店：不卖书，卖"生活方式提案"</h2><span class="tpl">content</span><span class="fixed">修复</span><a href="slides/04.html" target="_blank">原件 ↗</a></div><img src="screenshots/04.png"></div>
-<div class="page"><div class="page-head"><span class="num">05</span><h2>空间叙事：MUJI Base 与星巴克臻选的增值密码</h2><span class="tpl">content</span><span class="fixed">修复</span><a href="slides/05.html" target="_blank">原件 ↗</a></div><img src="screenshots/05.png"></div>
-<div class="page"><div class="page-head"><span class="num">06</span><h2>落地方法论：如何将您的品牌"事"态化</h2><span class="tpl">content</span><span class="fixed">修复</span><a href="slides/06.html" target="_blank">原件 ↗</a></div><img src="screenshots/06.png"></div>
-<div class="page"><div class="page-head"><span class="num">07</span><h2>从「物」出发，终至「事」成</h2><span class="tpl">closing</span><a href="slides/07.html" target="_blank">原件 ↗</a></div><img src="screenshots/07.png"></div>
+<div class="page"><div class="page-head"><span class="num">01</span><h2>从「物」到「事」：日本体验经济的营销范式重塑</h2><span class="tpl">cover</span><a href="slides/01.html" target="_blank">原件 ↗</a></div><img src="screenshots/01.png"></div>
+<div class="page"><div class="page-head"><span class="num">02</span><h2>目录 / CONTENTS</h2><span class="tpl toc">toc</span><a href="slides/02.html" target="_blank">原件 ↗</a></div><img src="screenshots/02.png"></div>
+<div class="page"><div class="page-head"><span class="num">03</span><h2>消费者告别「物欲」：四大体验消费浪潮重塑市场边界</h2><span class="tpl">content</span><a href="slides/03.html" target="_blank">原件 ↗</a></div><img src="screenshots/03.png"></div>
+<div class="page"><div class="page-head"><span class="num">04</span><h2>星野リゾート：将「住宿」转化为不可复制的自然探索体验</h2><span class="tpl">content</span><a href="slides/04.html" target="_blank">原件 ↗</a></div><img src="screenshots/04.png"></div>
+<div class="page"><div class="page-head"><span class="num">05</span><h2>中目黑星巴克：把「喝咖啡」升级为五感俱全的娱乐盛宴</h2><span class="tpl">content</span><a href="slides/05.html" target="_blank">原件 ↗</a></div><img src="screenshots/05.png"></div>
+<div class="page"><div class="page-head"><span class="num">06</span><h2>重构 CX 触点：企业落地「事营销」的三大黄金法则</h2><span class="tpl">content</span><a href="slides/06.html" target="_blank">原件 ↗</a></div><img src="screenshots/06.png"></div>
+<div class="page"><div class="page-head"><span class="num">07</span><h2>创造不可替代的「瞬间」：开启您的体验营销转型之旅</h2><span class="tpl">closing</span><a href="slides/07.html" target="_blank">原件 ↗</a></div><img src="screenshots/07.png"></div>
 </div>
-<footer>7 页（含 toc 目录页）· check_slide_layout 几何检测 + 4 轮 LLM 修复循环 · 19 工具 · 郑州 OBS</footer>
+<footer>7 页（含 toc）· CSS 变量配色一致 · 19 工具 · 优化 prompt · 郑州 OBS + GitHub Pages</footer>
 </div></body></html>

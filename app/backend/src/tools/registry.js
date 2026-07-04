@@ -11,6 +11,10 @@ import * as store from '../store/project.js';
 import { renderSlidePng, checkSlideLayout, exportDeckPptx, exportDeckPdf } from '../render/puppeteer.js';
 import { webSearchProxy, imageGenerationProxy } from './external.js';
 import { provider, chat, chatVision, imageGen } from '../util/llm.js';
+import {
+  SCHOLAR_SYSTEM, VIDEO_SEARCH_SYSTEM, UNDERSTAND_VIDEO_SYSTEM,
+  CRAWLER_FALLBACK_SYSTEM, SUMMARIZE_SYSTEM
+} from '../agent/prompts.js';
 
 const sh = promisify(exec);
 const viewports = new Map();
@@ -157,7 +161,7 @@ async function crawler({ url }) {
   } catch (e) {
     if (provider) {
       const summary = await chat([
-        { role: 'system', content: '你是抓取助手，对给定 URL 做概览（无法直连时基于常识给出该站点通常内容，标注"推测"）。' },
+        { role: 'system', content: CRAWLER_FALLBACK_SYSTEM },
         { role: 'user', content: `URL: ${url}` }
       ], { max_tokens: 1500 });
       return { url, markdown: summary, fetched: false, fallback: 'llm', error: e.message };
@@ -184,7 +188,7 @@ async function summarize_large_document({ url, question }) {
   const c = await crawler({ url });
   const doc = c.markdown || '';
   const ans = await chat([
-    { role: 'system', content: '你是对长文档做精准问答的助手。基于给定文档内容回答问题，若文档无相关信息就说明。' },
+    { role: 'system', content: SUMMARIZE_SYSTEM },
     { role: 'user', content: `文档(${doc.length} 字符):\n${doc.slice(0, 12000)}\n\n问题: ${question}` }
   ], { max_tokens: 2000, temperature: 0.2 });
   return { url, question, summary: ans, doc_length: doc.length };
@@ -193,7 +197,7 @@ async function summarize_large_document({ url, question }) {
 async function scholar_search({ query }) {
   if (!provider) return { query, results: [], demo: true };
   const text = await chat([
-    { role: 'system', content: '你是学术搜索助手。对查询给出 3-5 条学术论文式结果，JSON 数组：[{"title","authors","year","venue","abstract","url"}]。只输出 JSON。' },
+    { role: 'system', content: SCHOLAR_SYSTEM },
     { role: 'user', content: query }
   ], { max_tokens: 2000, temperature: 0.3 });
   let results = [];
@@ -246,7 +250,7 @@ async function read_image({ image_url, question }) {
 async function video_search({ query }) {
   if (!provider) return { query, results: [], demo: true };
   const text = await chat([
-    { role: 'system', content: '你是 YouTube 搜索助手。对查询给出 3-5 条视频结果，JSON 数组：[{"title","video_id","channel","duration","description","url"}]。video_id 是 11 位 YouTube id。只输出 JSON。' },
+    { role: 'system', content: VIDEO_SEARCH_SYSTEM },
     { role: 'user', content: query }
   ], { max_tokens: 1800, temperature: 0.3 });
   let results = [];
@@ -258,7 +262,7 @@ async function understand_video({ video_id, provide_download_link = false }) {
   // 无 YouTube transcript API，用 360 chat 基于 video_id 占位（真实需 youtube-transcript-api）
   if (!provider) return { video_id, transcript: '(demo 占位)' };
   const text = await chat([
-    { role: 'system', content: '你是视频转录助手。基于 YouTube video_id 给出 plausible 转录概览（标注"推测"），含时间戳分段。' },
+    { role: 'system', content: UNDERSTAND_VIDEO_SYSTEM },
     { role: 'user', content: `video_id: ${video_id}` }
   ], { max_tokens: 2000 });
   return { video_id, transcript: text, speculative: true, download_link: provide_download_link ? `https://www.youtube.com/watch?v=${video_id}` : null };

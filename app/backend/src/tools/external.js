@@ -2,12 +2,13 @@
 // 对齐 360-api skill：360 网关 OpenAI 兼容，原生 fetch 零依赖
 // 无 key 或调用失败时返回确定性占位，保持流程可演示
 import { provider, chat, imageGen } from '../util/llm.js';
+import { WEB_SEARCH_SYSTEM } from '../agent/prompts.js';
 
 export async function webSearchProxy(q) {
   if (!provider) return demoSearchResult(q);
   try {
     const text = await chat([
-      { role: 'system', content: '你是研究助手。对用户查询给出 3-5 条带标题/URL/摘要的搜索式结果，URL 用真实可访问的猜测域名。' },
+      { role: 'system', content: WEB_SEARCH_SYSTEM },
       { role: 'user', content: q }
     ], { temperature: 0.3, max_tokens: 2048 });
     return { query: q, results: [{ title: 'LLM 概览', url: '', snippet: text }], llm: true, provider: provider.name };
